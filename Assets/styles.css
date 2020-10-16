@@ -1,0 +1,13 @@
+body {
+    background-color: #313163;
+}
+
+#test-status {
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+}
+
+#test {
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+}
