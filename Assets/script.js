@@ -67,7 +67,7 @@ var questions = [
     }
 
 ]
-
+get("stats").setAttribute("style", "display: none");
 get("initialInput").setAttribute("style", "display: none");
 function get(x) {
     return document.getElementById(x);
@@ -144,6 +144,17 @@ function start() {
     displayQuestion();
 }
 
+function submitButton() {
+    var userSubmit = document.getElementById("initialInput").value;
+    console.log(userSubmit);
+    
+}
+
+function displayStats() {
+
+}
+
+get("submit-button").addEventListener("click", submitButton);
 get("start-button").addEventListener("click", start);
 
 
