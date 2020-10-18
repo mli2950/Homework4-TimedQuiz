@@ -9,6 +9,7 @@ var chA = "";
 var chB = "";
 var chC = "";
 var chD = "";
+var quizTimer = 50;
 
 var questions = [
     {
@@ -67,6 +68,7 @@ var questions = [
 
 ]
 
+get("initialInput").setAttribute("style", "display: none");
 function get(x) {
     return document.getElementById(x);
 }
@@ -74,10 +76,11 @@ function get(x) {
 function displayQuestion() {
     test = get("test");
     if (pos >= questions.length) {
-        test.innerHTML = "<h2>You got " + correct + " of " + questions.length + " questions correct</h2>";
+        test.innerHTML = "<h2>You got " + correct + " of " + questions.length + " questions correct</h2>" + Math.round(100 * correct/questions.length) + "%";
         get("test_status").innerHTML = "Test Completed";
-        pos = 0;
-        correct = 0;
+        get("initialInput").setAttribute("style", "display: block");
+        quizTimer = "";
+        get("timer").setAttribute("style", "display: none");
         return false;
     }
     get("test_status").innerHTML = "Question " + (pos + 1) + " of " + questions.length;
@@ -85,8 +88,8 @@ function displayQuestion() {
     question = questions[pos].question;
     chA = questions[pos].a;
     chB = questions[pos].b;
-    chC = questions[pos].c
-    chD = questions[pos].d
+    chC = questions[pos].c;
+    chD = questions[pos].d;
 
 test.innerHTML = "<h3>" + question + "</h3>";
 
@@ -94,8 +97,8 @@ test.innerHTML = "<h3>" + question + "</h3>";
     test.innerHTML += "<label> <input type='radio' name='choices' value='B'> "+chB+"</label><br>";
     test.innerHTML += "<label> <input type='radio' name='choices' value='C'> " + chC + "</label><br><br>";
     test.innerHTML += "<label> <input type='radio' name='choices' value='D'> " + chD + "</label><br><br>";
-    
-  test.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
+    test.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
+  
     
     
 }
@@ -110,6 +113,8 @@ function checkAnswer() {
 
     if (choice == questions[pos].answer) {
         correct++;
+    } else {
+        quizTimer -= 10;
     }
 
     pos++
@@ -117,9 +122,33 @@ function checkAnswer() {
     displayQuestion();
 }
 
+// Start Function
+function start() {
+    get("quizTitle").setAttribute("style", "display: none");
+    get("quizInst").setAttribute("style", "display: none");
+    get("start-button").setAttribute("style", "display: none");
+    get("showQuiz").setAttribute("style", "display: block !important");
+    setInterval(function () {
+        if (quizTimer <= 0) {
+          clearInterval(quizTimer);
+            get("timer").innerHTML = "time expired";
+            test.innerHTML = "<h2>You got " + correct + " of " + questions.length + " questions correct</h2>" + Math.round(100 * correct/questions.length) + "%";
+        get("test_status").innerHTML = "Test Completed";
+        return false;
+        } else {
+          get("timer").innerHTML = quizTimer;
+        }
+        quizTimer -= 1;
+      }, 1000);
+
+    displayQuestion();
+}
+
+get("start-button").addEventListener("click", start);
 
 
 
 
-window.addEventListener("load", displayQuestion);
+
+// window.addEventListener("load", displayQuestion);
     
