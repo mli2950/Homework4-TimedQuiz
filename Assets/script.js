@@ -9,7 +9,7 @@ var chA = "";
 var chB = "";
 var chC = "";
 var chD = "";
-var quizTimer = 100;
+var quizTimer = 90;
 
 var questions = [
     {
@@ -141,9 +141,15 @@ function start() {
     setInterval(function () {
         if (quizTimer <= 0) {
           clearInterval(quizTimer);
-            get("timer").innerHTML = "time expired";
+            get("timer").innerHTML = "You have run out of time!";
             test.innerHTML = "<h2>You got " + correct + " of " + questions.length + " questions correct</h2>" + Math.round(100 * correct/questions.length) + "%";
-        get("test_status").innerHTML = "Test Completed";
+            get("test_status").innerHTML = "Test Completed";
+            var highscore = document.querySelector("#highscore");
+            highscore.textContent = "Highscore: " + localStorage.getItem(localStorage.key(1)) + " by: " + localStorage.getItem(localStorage.key(0));
+
+        if (localStorage.getItem(localStorage.key(1)) == null) {
+            highscore.textContent = "";
+        }
         return false;
         } else {
           get("timer").innerHTML = quizTimer;
@@ -179,8 +185,4 @@ get("submit-button").addEventListener("click", submitButton);
 get("start-button").addEventListener("click", start);
 
 
-
-
-
-// window.addEventListener("load", displayQuestion);
     
