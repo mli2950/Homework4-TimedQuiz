@@ -147,7 +147,7 @@ function start() {
             var highscore = document.querySelector("#highscore");
             highscore.textContent = "Highscore: " + localStorage.getItem(localStorage.key(1)) + " by: " + localStorage.getItem(localStorage.key(0));
 
-        if (localStorage.getItem(localStorage.key(1)) == null) {
+            if (localStorage.getItem(localStorage.key(1)) == null) {
             highscore.textContent = "";
         }
         return false;
