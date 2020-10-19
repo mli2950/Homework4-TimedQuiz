@@ -22,6 +22,6 @@ After all this, I got to work on storing the user's highscore. I did this by fir
 
 ## Screenshots
 
-![Home Page](..\Assets\starterPage.png "Home Page")
-![Questions](.\Assets\questions.png "Questions")
-![Results Page](Assets\resultsPage.png "Results Page")
+![Home Page](starterPage.png "Home Page")
+![Questions](questions.png "Questions")
+![Results Page](resultsPage.png "Results Page")
